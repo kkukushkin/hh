@@ -31,7 +31,7 @@ def define_skills():
     percent100 = s.value_counts(normalize=True).mul(100).round(1).astype(str) + '%'
     abc2 = pd.DataFrame({'counts': counts})
     abc2.reset_index()
-    abc2['proc'] = round(abc2.counts / 3947 * 100, 2)
+    abc2['proc'] = round(abc2.counts / 4948 * 100, 2)
     new1 = abc2['proc'].loc[lambda x : x>5].reset_index()
     new1.sort_values(['proc'], ascending = True)
     return new1
@@ -44,7 +44,7 @@ def aerospace_skills():
     percent100 = s.value_counts(normalize=True).mul(100).round(1).astype(str) + '%'
     abc2 = pd.DataFrame({'counts': counts})
     abc2.reset_index()
-    abc2['proc'] = round(abc2.counts / 291 * 100, 2)
+    abc2['proc'] = round(abc2.counts / 295 * 100, 2)
     new1 = abc2['proc'].loc[lambda x : x>4].reset_index()
     new1.sort_values(['proc'], ascending = True)
     return new1
@@ -56,7 +56,7 @@ def count_salary_by_skills():
     counts = counts.rename(columns={'index': 'skill'})
     skills1 = skills.merge(counts, on='skill', how='outer')
     skills1.drop(skills1.index[[0]]).reset_index(drop = True)
-    new = skills1.loc[skills1.times > 200]
+    new = skills1.loc[skills1.times > 250]
 #    new1 = new.loc[skills1.spec_name == column_chosen]
     filtered_tab = new.dropna(how='all', subset=['salary_from', 'salary_to'])
     filtered_tab['salary_to'].fillna(filtered_tab['salary_from']) #, inplace = True)
@@ -75,7 +75,7 @@ def count_salary_by_skills_aerospace():
     counts = counts.rename(columns={'index': 'skill'})
     skills1 = skills.merge(counts, on='skill', how='outer')
     skills1.drop(skills1.index[[0]]).reset_index(drop = True)
-    new = skills1.loc[skills1.times > 150]
+    new = skills1.loc[skills1.times > 170]
     new1 = new.loc[new.spec_name == 'Авиационная промышленность']
     filtered_tab = new1.dropna(how='all', subset=['salary_from', 'salary_to'])
     filtered_tab['salary_to'].fillna(filtered_tab['salary_from']) #, inplace = True)
@@ -101,7 +101,7 @@ aerpay = count_salary_by_skills_aerospace()
 #skills_all['total'].round(decimals = 0).reset_index()
 #skills1 = skills_all.reset_index()
 
-fig0 = px.bar(profs.sort_values(['spec_name']), x="spec_name", y="index", labels={"spec_name": "ед.", "index": "Профессии"}, color="spec_name", title='Выборка по запросу "инженер" на hh.ru, ед., 4285 вакансий')
+fig0 = px.bar(profs.sort_values(['spec_name']), x="spec_name", y="index", labels={"spec_name": "ед.", "index": "Профессии"}, color="spec_name", title='Выборка по запросу "инженер" на hh.ru, ед., 4948 вакансий')
 fig0.update_traces(textfont_size=20, texttemplate='%{x:d3-format} ед.', textposition="outside", cliponaxis=False)
 fig0.update_xaxes(categoryorder='category ascending')
 fig0.update_layout(yaxis = dict(tickfont = dict(size=10)),
@@ -112,7 +112,7 @@ fig0.update_layout(yaxis = dict(tickfont = dict(size=10)),
 )
 
 
-fig = px.bar(new.sort_values(['proc']), x="proc", y="index", labels={"proc": "%", "index": "Навыки"}, color="proc", title='Наиболее востребованные навыки по запросу "инженер" на hh.ru, %, 4285 вакансий')
+fig = px.bar(new.sort_values(['proc']), x="proc", y="index", labels={"proc": "%", "index": "Навыки"}, color="proc", title='Наиболее востребованные навыки по запросу "инженер" на hh.ru, %, 4948 вакансий')
 fig.update_traces(textfont_size=20, texttemplate='%{x:d3-format}%', textposition="outside", cliponaxis=False)
 fig.update_xaxes(categoryorder='category ascending')
 fig.update_layout(yaxis = dict(tickfont = dict(size=10)),
@@ -122,7 +122,7 @@ fig.update_layout(yaxis = dict(tickfont = dict(size=10)),
     font_color=colors['text']
 )
 
-fig3 = px.bar(aer.sort_values(['proc']), x="proc", y="index", labels={"proc": "%", "index": "Навыки"}, color="proc", title='Наиболее востребованные навыки по запросу "инженер-авиастроитель" на hh.ru, %, 291 вакансий')
+fig3 = px.bar(aer.sort_values(['proc']), x="proc", y="index", labels={"proc": "%", "index": "Навыки"}, color="proc", title='Наиболее востребованные навыки по запросу "инженер-авиастроитель" на hh.ru, %, 295 вакансий')
 fig3.update_traces(textfont_size=20, texttemplate='%{x:d3-format}%', textposition="outside", cliponaxis=False)
 fig3.update_xaxes(categoryorder='category ascending')
 fig3.update_layout(yaxis = dict(tickfont = dict(size=10)),
@@ -133,7 +133,7 @@ fig3.update_layout(yaxis = dict(tickfont = dict(size=10)),
 )
 
 
-fig2 = px.bar(skills_all.sort_values(['total']).reset_index(), x="total", y="skill", labels={"total": "руб.", "skill": "Навыки"}, color="total", title='Наиболее высокооплачиваемые навыки по запросу "инженер" на hh.ru, руб., 4285 вакансий')
+fig2 = px.bar(skills_all.sort_values(['total']).reset_index(), x="total", y="skill", labels={"total": "руб.", "skill": "Навыки"}, color="total", title='Наиболее высокооплачиваемые навыки по запросу "инженер" на hh.ru, руб., 4948 вакансий')
 fig2.update_traces(textfont_size=20, texttemplate='%{x:2f} руб.', textposition="outside", cliponaxis=False)
 fig2.update_xaxes(categoryorder='category ascending')
 fig2.update_layout(yaxis = dict(tickfont = dict(size=10)),
@@ -143,7 +143,7 @@ fig2.update_layout(yaxis = dict(tickfont = dict(size=10)),
     font_color=colors['text']
 )
 
-fig1 = px.bar(aerpay.sort_values(['total']).reset_index(), x="total", y="skill", labels={"total": "руб.", "skill": "Навыки"}, color="total", title='Наиболее высокооплачиваемые навыки по запросу "инженер-авиастроитель" на hh.ru, руб., 291 вакансий*')
+fig1 = px.bar(aerpay.sort_values(['total']).reset_index(), x="total", y="skill", labels={"total": "руб.", "skill": "Навыки"}, color="total", title='Наиболее высокооплачиваемые навыки по запросу "инженер-авиастроитель" на hh.ru, руб., 295 вакансий')
 fig1.update_traces(textfont_size=20, texttemplate='%{x:2f} руб.', textposition="outside", cliponaxis=False)
 fig1.update_xaxes(categoryorder='category ascending')
 fig1.update_layout(yaxis = dict(tickfont = dict(size=10)),
@@ -155,7 +155,7 @@ fig1.update_layout(yaxis = dict(tickfont = dict(size=10)),
 
 
 app.layout = html.Div(children=[
-    html.H1(children='Дэшборд по инженерным вакансиям hh.ru. Центр НТИ СПбПУ©. 2021.', style={'text-align':'center', 'color': 'black', 'font-family': 'Arial', 'fontSize': 18}),
+    html.H1(children='Дэшборд по инженерным вакансиям hh.ru. Центр НТИ СПбПУ©. 2022.', style={'text-align':'center', 'color': 'black', 'font-family': 'Arial', 'fontSize': 18}),
     dcc.Graph(
         id='График выборка',
         figure=fig0
